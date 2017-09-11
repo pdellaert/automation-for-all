@@ -1,2 +1,10 @@
 ---
 # tasks file for deploy_vch
+
+- name : Check VCH deploy binary
+  stat :
+    path : {{ vchBinaryPath }}/{{ binary }}
+  register : binaryFile
+  delegate_to : localhost
+- name : Verify Binary File
+  assert : binaryFile.exists
