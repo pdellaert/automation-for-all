@@ -26,7 +26,7 @@
   delegate_to: localhost
 
 - name: Update firewall ESXi
-  when: !use_vcenter
+  when: not use_vcenter
   command: "/{{vic_home}}/vic-machine-linux update firewall --target {{inventory_hostname}} --user {{esxi_user}} --password {{esxi_password}} --thumbprint {{vcenter_sslthumbprint}} --allow"
   # args:
   #   target: {{esxi_host}} 
