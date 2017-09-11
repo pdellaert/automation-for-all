@@ -33,4 +33,4 @@
     use_vcenter: yes
     
   roles:
-   prepare_hosts
+  - prepare_hosts
