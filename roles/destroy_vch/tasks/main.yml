@@ -1,2 +1,6 @@
 ---
 # tasks file for destroy_vch
+
+- name : Delete Virtual Container Host
+  command : {{ vchBinaryPath }}/{{ binary }} delete --target {{ vcenter_user}}:{{ vcenter_password}}@{{ vcenter_host}} --thumbprint {{ vcenter_sslthumbprint }} --name {{ vch_name }}
+  delegate_to : localhost
