@@ -21,7 +21,8 @@
     vic_home: /tmp/vic-tools
     ova_path: /Users/pdellaer/Downloads
     ova_file_name: vic-v1.1.1_56a309fb.ova
-    
+    vic_binary: vic-machine-linux
+
   roles:
   - deploy_vic
 
