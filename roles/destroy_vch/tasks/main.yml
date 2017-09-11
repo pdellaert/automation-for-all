@@ -1,20 +1,6 @@
 ---
-<<<<<<< HEAD
 # tasks file for destroy_vch
 
 - name : Delete Virtual Container Host
   command : {{ vchBinaryPath }}/{{ binary }} delete --target {{ vcenter_user}}:{{ vcenter_password}}@{{ vcenter_host}} --thumbprint {{ vcenter_sslthumbprint }} --name {{ vch_name }}
   delegate_to : localhost
-=======
-# tasks file for deploy_vch
-
-- name : Check VCH deploy binary
-  stat :
-    path : {{ vchBinaryPath }}/{{ binary }}
-  register : binaryFile
-  delegate_to : localhost
-- name : Verify Binary File
-  assert : binaryFile.exists
-- name : Deploy Virtual Container Host on vSphere
-  command : {{ vchBinaryPath }}/{{ binary }} create --name={{ vch_name }} --target={{ vcenter_host }} --thumbprint={{ vcenter_slthumbprint }} --user={{ vcenter_user }} --password={{ vcenter_password }} --compute-resource={{ vcenter_cluster }} --public-network={{ vch_network }} --bridge-network={{ vch_network }} --no-tls
->>>>>>> 2ce29268cdc14efdd9d899af64e2cae1feef7d65
