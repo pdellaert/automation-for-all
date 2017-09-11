@@ -1,2 +1,44 @@
+#{{vic-home}} - path for vic binaries
 ---
+tasks:
+
+- name: Createe vic_Home
+  file:
+    path: /{{vic_home}}
+    state: directory
+  delegate_to: localhost
+- name: Unarchive vic
+  unarchive:
+    src: https://{{vic_ip}:9443/vic_1.1.0-version.tar.gz
+    #dest: /{{vic_home}}
+    dest: /var/vic
+    remote_src: yes
+    mode: 0644
+  delegate_to: localhost
+- name: Update firewall vCenter
+  when: use_vcenter
+  command: /{{vic_home}}/vic-machine-linux update firewall --target {{vcenter_host}} --user {{vcenter_user}} --password {{vcenter_password}} --compute-resource {{vcenter_cluster}} --thumbprint {{vcenter_sslthumbprint}} --allow
+  # args:
+  #   target: {{vcenter_host}} 
+  #   user: {{vcenter_user}} 
+  #   password: {{vcenter_password}}
+  #   compute-resource: {{vcenter_cluster}} 
+  #   thumbprint: {{vcenter_sslthumbprint}} 
+  #   allow:
+  #   chgdir: {{vic_home}}
+  delegate_to: localhost
+
+- name: Update firewall ESXi
+  when: !use_vcenter
+  command: /{{vic_home}}/vic-machine-linux update firewall --target {{inventory_hostname}} --user {{esxi_user}} --password {{esxi_password}} --thumbprint {{vcenter_sslthumbprint}} --allow
+  # args:
+  #   target: {{esxi_host}} 
+  #   user: {{esxi_user}} 
+  #   password: {{esxi_password}}
+  #   compute-resource: {{esxi_cluster}} 
+  #   allow:
+  #   chgdir: {{vic_home}}
+  delegate_to: localhost
+
+
 # tasks file for prepare_hosts
