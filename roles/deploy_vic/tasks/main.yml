@@ -1,5 +1,3 @@
----
-# tasks file for deploy_vic
 - name: Deploy OVA Image on vCenter
   delegate_to:localhost
   command: >
@@ -10,7 +8,7 @@
     --machineOutput
     -dm=thin
     -ds={{ vcenter_datastore }}
-    -n={{ inventory_hostname }}
+    -n={{ vmname }}
     --prop:"appliance.root_pwd={{appliance_root}}"
     --prop:"appliance.permit_root_login={{permit_root_login}}"
     --prop:"IpAssignment.IpProtocol={{ip_protocol}}"
@@ -20,21 +18,54 @@
     --prop:"network.netmask0={{vic_netmask}}"
     --prop:"network.DNS={{dns_server}}"
     --prop:"network.searchpath={{dns_searchpath}}"
+    {% if registry_deploy %}
     --prop:"registry.deploy={{registry_deploy}}"
+    {% endif %}
+    {% if registery_port %}
     --prop:"registry.port={{registry_port}}"
+    {% endif %}
+    {% if registry_notary_port %}
     --prop:"registry.notary_port={{registry_notary_port}}"
+    {% endif %}
+    {% if registry_admin_password %}
     --prop:"registry.admin_password={{registry_admin_password}}"
+    {% endif %}
+    {% if registry_db_password %}
     --prop:"registry.db_password={{registry_db_password}}"
+    {% endif %}
+    {% if registry_gc_enabled %}
     --prop:"registry.gc_enabled={{registry_gc_enabled}}"
+    {% endif %}
+    {% if egistry_ssl_cert %}
     --prop:"registry.ssl_cert={{registry_ssl_cert}}"
+    {% endif %}
+    {% if registry_ssl_cert_key %}
     --prop:"registry.ssl_cert_key={{registry_ssl_cert_key}}"
+    {% endif %}
+    {% if management_portal_deploy %}
     --prop:"management_portal.deploy={{management_portal_deploy}}"
+    {% endif %}
+    {% if management_portal_port %}
     --prop:"management_portal.port={{management_portal_port}}"
+    {% endif %}
+    {% if management_portal_ssl_cert %}
     --prop:"management_portal.ssl_cert={{management_portal_ssl_cert}}"
+    {% endif %}
+    {% if management_portal_ssl_cert_key %}
     --prop:"management_portal.ssl_cert_key={{management_portal_ssl_cert_key}}"
+    {% endif %}
+    {% if fileserver_port %}
     --prop:"fileserver.port={{fileserver_port}}"
+    {% endif %}
+    {% if fileserver_ssl_cert %}
     --prop:"fileserver.ssl_cert={{fileserver_ssl_cert}}"
+    {% endif %}
+    {% if fileserver_ssl_cert_key %}
     --prop:"fileserver.ssl_cert_key={{fileserver_ssl_cert_key}}"
-    --prop:"NetworkMapping.Network={{NetworkMapping_Network}}"
+    {% endif %}
+    {% if networkmapping_network %}
+    --prop:"NetworkMapping.Network={{networkmapping_network}}"
+    {% endif %}
     "{{ ova_path }}/{{ ova_file_name }}"
     vi://'{{ vcenter_user | urlencode }}':'{{ vcenter_password | urlencode }}'@{{ vcenter_host }}/{{ vcenter_datacenter }}/host/{{ vcenter_cluster }} 
+
