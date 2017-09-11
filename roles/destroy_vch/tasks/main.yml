@@ -1,2 +1,12 @@
 ---
-# tasks file for destroy_vch
+# tasks file for deploy_vch
+
+- name : Check VCH deploy binary
+  stat :
+    path : {{ vchBinaryPath }}/{{ binary }}
+  register : binaryFile
+  delegate_to : localhost
+- name : Verify Binary File
+  assert : binaryFile.exists
+- name : Deploy Virtual Container Host on vSphere
+  command : {{ vchBinaryPath }}/{{ binary }} create --name={{ vch_name }} --target={{ vcenter_host }} --thumbprint={{ vcenter_slthumbprint }} --user={{ vcenter_user }} --password={{ vcenter_password }} --compute-resource={{ vcenter_cluster }} --public-network={{ vch_network }} --bridge-network={{ vch_network }} --no-tls
