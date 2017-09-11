@@ -27,13 +27,9 @@
     fileserver_port: 9443
     ova_path: /home/team4
     ova_file_name: vic-v1.1.1_56a309fb.ova
-<<<<<<< HEAD
     vic_binary: vic-machine-linux
-
-=======
     vcenter_sslthumbprint: "49 B8 F2 EA 5A 44 13 DF 40 6A 6C 80 1D 69 8F"
     
->>>>>>> 72dfd63f618df86aeb84842ce41ef20178db80b7
   roles:
   - deploy_vic
 
