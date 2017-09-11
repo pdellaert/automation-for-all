@@ -1,2 +1,23 @@
+#{{vic-home}}
+
+- name: Createe vic_Home
+  file:
+    path: /{{vic_home}}
+    state: directory
+  delegate_to: localhost
+- name: Unarchive vic
+  unarchive:
+    src: https://{{vic_ip}:9443/vic_1.1.0-version.tar.gz
+    #dest: /{{vic_home}}
+    dest: /tmp/vic
+    remote_src: yes
+    mode: 0644
+  delegate_to: localhost
+- name: Update firewall
+    command: vic-machine-linux update firewall --target {{vcenter_host}} --user {{vcenter_user}} --password {{vcenter_password}} --compute-resource {{vcenter_cluster}} --thumbprint {{vcenter_sslthumbprint}} --allow
+    chdir: {{vic_home}}
+  delegate_to: localhost
+
+
 ---
 # tasks file for prepare_hosts
