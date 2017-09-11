@@ -33,12 +33,20 @@
     
   roles:
   - deploy_vic
-
-- hosts: esxi
-  vars:
-  roles:
   - prepare_hosts
 
 - hosts: vch
+  vars:
+    vcenter_ovftool: /usr/bin/ovftool
+    vcenter_host: 192.168.4.10
+    vcenter_user: administrator@vsphere.local
+    vcenter_password: VMware1!
+    vcenter_datastore: vsanDatastore
+    vcenter_cluster: Hackathon-Cluster
+    vcenter_datacenter: Hackathon-Datacenter
+    vcenter_sslthumbprint: "49 B8 F2 EA 5A 44 13 DF 40 6A 6C 80 1D 69 8F"
+    vic_home: /tmp/vic-tools
+    vic_version: 56a309fb
+    vic_binary: vic-machine-linux
   roles:
   - deploy_vch
