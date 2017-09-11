@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+  vars:
+    vcenter_ovftool: /usr/local/bin/ovftool
+    vcenter_host: 192.168.4.10
+    vcenter_user: administrator@vsphere.local
+    vcenter_password: VMware1!
+    vcenter_datastore: vsanDatastore
+    vcenter_cluster: Hackathon-Cluster
+    vcenter_datacenter: Hackathon-Datacenter
+    vic_name: team-4-vic
+    mgmt_ip: 192.168.4.51
+    vic_netmask: 255.255.255.0
+    network_fqdn: 192.168.4.51
+    dns_server: 8.8.8.8
+    dns_searchpath: team4.local
+    gateway: 192.168.4.254
+    appliance_root: "VMware1!"
+    permit_root_login: true
+    ip_protocol: ipv4
+    vic_home: /tmp/vic-tools
+    ova_path: /Users/pdellaer/Downloads
+    ova_file_name: vic-v1.1.1_56a309fb.ova
+    
+  roles:
+  - deploy_vic
+
