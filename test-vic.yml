@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   vars:
-    vcenter_ovftool: /usr/local/bin/ovftool
+    vcenter_ovftool: /usr/bin/ovftool
     vcenter_host: 192.168.4.10
     vcenter_user: administrator@vsphere.local
     vcenter_password: VMware1!
@@ -19,7 +19,13 @@
     permit_root_login: true
     ip_protocol: ipv4
     vic_home: /tmp/vic-tools
-    ova_path: /Users/pdellaer/Downloads
+    registry_admin_password: VMware1!
+    registry_port: 443
+    registry_notary_port: 4443
+    registry_db_password: VMware1!
+    management_portal_port: 8282
+    fileserver_port: 9443
+    ova_path: /home/team4
     ova_file_name: vic-v1.1.1_56a309fb.ova
     
   roles:
