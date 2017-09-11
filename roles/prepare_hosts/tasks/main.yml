@@ -11,6 +11,7 @@
     dest: "/{{vic_home}}"
     remote_src: yes
     mode: 0644
+    validate_certs: no
   delegate_to: localhost
 - name: Update firewall vCenter
   when: use_vcenter
