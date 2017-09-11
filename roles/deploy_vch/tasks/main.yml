@@ -10,3 +10,4 @@
   assert : binaryFile.exists
 - name : Deploy Virtual Container Host on vSphere
   command : {{ vchBinaryPath }}/{{ binary }} create --name={{ vch_name }} --target={{ vcenter_host }} --thumbprint={{ vcenter_sslthumbprint }} --user={{ vcenter_user }} --password={{ vcenter_password }} --compute-resource={{ vcenter_cluster }} --public-network={{ vch_network }} --bridge-network={{ vch_network }} --no-tls
+  delegate_to : localhost
