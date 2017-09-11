@@ -1,0 +1,23 @@
+---
+- hosts: all
+  vars:
+    ovftool: /usr/local/bin/ovftool
+    vcenter_host: 192.168.0.10
+    vcenter_username: team4
+    vcenter_password: VMware1!
+    vcenter_datastore: vsanDatastore
+    vcenter_cluster: Hackathon-Cluster
+    vcenter_datacenter: Hackathon-Datacenter
+    vic_ip: 192.168.4.51
+    vic_netmask: 255.255.255.0
+    vic_home: /tmp/vic-tools
+  roles:
+  - deploy_vic
+
+- hosts: esxi
+  roles:
+  - prepare_hosts
+
+- hosts: vch
+  roles:
+  - deploy_vch
