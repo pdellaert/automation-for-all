@@ -1,7 +1,7 @@
 ---
 - hosts: vic
   vars:
-    vcenter_ovftool: /usr/local/bin/ovftool
+    vcenter_ovftool: /usr/bin/ovftool
     vcenter_host: 192.168.4.10
     vcenter_user: administrator@vsphere.local
     vcenter_password: VMware1!
@@ -25,7 +25,7 @@
     registry_db_password: VMware1!
     management_portal_port: 8282
     fileserver_port: 9443
-    ova_path: /Users/pdellaer/Downloads
+    ova_path: /home/team4
     ova_file_name: vic-v1.1.1_56a309fb.ova
     vcenter_sslthumbprint: "49 B8 F2 EA 5A 44 13 DF 40 6A 6C 80 1D 69 8F"
     
