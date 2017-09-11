@@ -1,2 +1,40 @@
 ---
 # tasks file for deploy_vic
+- name: Deploy OVA Image on vCenter
+  delegate_to:localhost
+  command: >
+    {{ vcenter_ovftool }}
+    --acceptAllEulas
+    --noSSLVerify
+    --powerOn
+    --machineOutput
+    -dm=thin
+    -ds={{ vcenter_datastore }}
+    -n={{ inventory_hostname }}
+    --prop:"appliance.root_pwd={{appliance_root}}"
+    --prop:"appliance.permit_root_login={{permit_root_login}}"
+    --prop:"IpAssignment.IpProtocol={{ip_protocol}}"
+    --prop:"network.fqdn={{network_fqdn}}"
+    --prop:"network.ip0={{mgmt_ip}}"
+    --prop:"network.gateway={{gateway}}"
+    --prop:"network.netmask0={{vic_netmask}}"
+    --prop:"network.DNS={{dns_server}}"
+    --prop:"network.searchpath={{dns_searchpath}}"
+    --prop:"registry.deploy={{registry_deploy}}"
+    --prop:"registry.port={{registry_port}}"
+    --prop:"registry.notary_port={{registry_notary_port}}"
+    --prop:"registry.admin_password={{registry_admin_password}}"
+    --prop:"registry.db_password={{registry_db_password}}"
+    --prop:"registry.gc_enabled={{registry_gc_enabled}}"
+    --prop:"registry.ssl_cert={{registry_ssl_cert}}"
+    --prop:"registry.ssl_cert_key={{registry_ssl_cert_key}}"
+    --prop:"management_portal.deploy={{management_portal_deploy}}"
+    --prop:"management_portal.port={{management_portal_port}}"
+    --prop:"management_portal.ssl_cert={{management_portal_ssl_cert}}"
+    --prop:"management_portal.ssl_cert_key={{management_portal_ssl_cert_key}}"
+    --prop:"fileserver.port={{fileserver_port}}"
+    --prop:"fileserver.ssl_cert={{fileserver_ssl_cert}}"
+    --prop:"fileserver.ssl_cert_key={{fileserver_ssl_cert_key}}"
+    --prop:"NetworkMapping.Network={{NetworkMapping_Network}}"
+    "{{ ova_path }}/{{ ova_file_name }}"
+    vi://'{{ vcenter_user | urlencode }}':'{{ vcenter_password | urlencode }}'@{{ vcenter_host }}/{{ vcenter_datacenter }}/host/{{ vcenter_cluster }} 
