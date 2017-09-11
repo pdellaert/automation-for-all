@@ -1,5 +1,5 @@
 - name: Deploy OVA Image on vCenter
-  delegate_to:localhost
+  delegate_to: localhost
   command: >
     {{ vcenter_ovftool }}
     --acceptAllEulas
@@ -8,7 +8,7 @@
     --machineOutput
     -dm=thin
     -ds={{ vcenter_datastore }}
-    -n={{ vmname }}
+    -n={{ vic_name }}
     --prop:"appliance.root_pwd={{appliance_root}}"
     --prop:"appliance.permit_root_login={{permit_root_login}}"
     --prop:"IpAssignment.IpProtocol={{ip_protocol}}"
@@ -18,52 +18,52 @@
     --prop:"network.netmask0={{vic_netmask}}"
     --prop:"network.DNS={{dns_server}}"
     --prop:"network.searchpath={{dns_searchpath}}"
-    {% if registry_deploy %}
+    {% if registry_deploy is defined %}
     --prop:"registry.deploy={{registry_deploy}}"
     {% endif %}
-    {% if registery_port %}
+    {% if registery_port is defined %}
     --prop:"registry.port={{registry_port}}"
     {% endif %}
-    {% if registry_notary_port %}
+    {% if registry_notary_port is defined %}
     --prop:"registry.notary_port={{registry_notary_port}}"
     {% endif %}
-    {% if registry_admin_password %}
+    {% if registry_admin_password is defined %}
     --prop:"registry.admin_password={{registry_admin_password}}"
     {% endif %}
-    {% if registry_db_password %}
+    {% if registry_db_password is defined %}
     --prop:"registry.db_password={{registry_db_password}}"
     {% endif %}
-    {% if registry_gc_enabled %}
+    {% if registry_gc_enabled is defined %}
     --prop:"registry.gc_enabled={{registry_gc_enabled}}"
     {% endif %}
-    {% if egistry_ssl_cert %}
+    {% if egistry_ssl_cert is defined %}
     --prop:"registry.ssl_cert={{registry_ssl_cert}}"
     {% endif %}
-    {% if registry_ssl_cert_key %}
+    {% if registry_ssl_cert_key is defined %}
     --prop:"registry.ssl_cert_key={{registry_ssl_cert_key}}"
     {% endif %}
-    {% if management_portal_deploy %}
+    {% if management_portal_deploy is defined %}
     --prop:"management_portal.deploy={{management_portal_deploy}}"
     {% endif %}
-    {% if management_portal_port %}
+    {% if management_portal_port is defined %}
     --prop:"management_portal.port={{management_portal_port}}"
     {% endif %}
-    {% if management_portal_ssl_cert %}
+    {% if management_portal_ssl_cert is defined %}
     --prop:"management_portal.ssl_cert={{management_portal_ssl_cert}}"
     {% endif %}
-    {% if management_portal_ssl_cert_key %}
+    {% if management_portal_ssl_cert_key is defined %}
     --prop:"management_portal.ssl_cert_key={{management_portal_ssl_cert_key}}"
     {% endif %}
-    {% if fileserver_port %}
+    {% if fileserver_port is defined %}
     --prop:"fileserver.port={{fileserver_port}}"
     {% endif %}
-    {% if fileserver_ssl_cert %}
+    {% if fileserver_ssl_cert is defined %}
     --prop:"fileserver.ssl_cert={{fileserver_ssl_cert}}"
     {% endif %}
-    {% if fileserver_ssl_cert_key %}
+    {% if fileserver_ssl_cert_key is defined %}
     --prop:"fileserver.ssl_cert_key={{fileserver_ssl_cert_key}}"
     {% endif %}
-    {% if networkmapping_network %}
+    {% if networkmapping_network is defined %}
     --prop:"NetworkMapping.Network={{networkmapping_network}}"
     {% endif %}
     "{{ ova_path }}/{{ ova_file_name }}"

@@ -12,3 +12,6 @@ localhost              ansible_connection=local
 [vch]
 192.168.4.90
 192.168.4.91
+
+[vic]
+192.168.4.51
